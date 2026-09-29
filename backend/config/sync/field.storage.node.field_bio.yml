@@ -1,0 +1,19 @@
+uuid: 4f9a1b4e-225c-41d2-b632-2327837882a1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_bio
+field_name: field_bio
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

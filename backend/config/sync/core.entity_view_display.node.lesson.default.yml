@@ -1,0 +1,53 @@
+uuid: 0dab7dda-82ad-4e48-b1a2-0d350b4e1806
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.lesson.field_course
+    - field.field.node.lesson.field_order
+    - field.field.node.lesson.field_video_url
+    - node.type.lesson
+  module:
+    - link
+    - user
+id: node.lesson.default
+targetEntityType: node
+bundle: lesson
+mode: default
+content:
+  field_course:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_order:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_video_url:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

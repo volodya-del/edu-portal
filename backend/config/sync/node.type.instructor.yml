@@ -1,0 +1,18 @@
+uuid: 9215fea7-6e77-4153-ad2e-a8b91eed07c9
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: Instructor
+type: instructor
+description: null
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

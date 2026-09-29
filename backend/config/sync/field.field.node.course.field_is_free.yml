@@ -1,0 +1,21 @@
+uuid: 0f6d7485-359f-4018-8a2b-4fc68f764a2a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_is_free
+    - node.type.course
+id: node.course.field_is_free
+field_name: field_is_free
+entity_type: node
+bundle: course
+label: 'Is free'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

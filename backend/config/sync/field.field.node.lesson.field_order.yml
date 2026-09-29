@@ -1,0 +1,23 @@
+uuid: 6174b427-2a8c-4cab-bf30-d2d879fd7780
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_order
+    - node.type.lesson
+id: node.lesson.field_order
+field_name: field_order
+entity_type: node
+bundle: lesson
+label: Order
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

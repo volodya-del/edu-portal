@@ -1,0 +1,23 @@
+uuid: 12d33cc3-1518-452a-b08f-6fbf2a0cb79b
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.course
+  module:
+    - node
+id: course
+label: Course
+type: 'canonical_entities:node'
+pattern: '/courses/[node:title]'
+selection_criteria:
+  21f87892-9465-4ae5-8d5f-b8c56202db40:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      course: course
+selection_logic: and
+weight: -5
+relationships: {  }
