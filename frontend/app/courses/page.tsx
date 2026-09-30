@@ -1,10 +1,10 @@
 import { drupal } from "@/lib/drupal";
 import Link from "next/link";
-
+import type { Course } from "@/lib/types";
 export const revalidate = 60; // ISR: оновлення кешу раз на хвилину
 
 export default async function CoursesPage() {
-  const courses = await drupal.getResourceCollection<any[]>("node--course", {
+  const courses = await drupal.getResourceCollection<Course[]>("node--course", {
     params: {
       "filter[status]": 1,
       include: "field_instructor,field_category,field_level",

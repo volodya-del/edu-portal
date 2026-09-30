@@ -1,8 +1,29 @@
 import { drupal } from "@/lib/drupal";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Course, Lesson } from "@/lib/types";
 
 export const revalidate = 60;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  try {
+    const course = await drupal.getResource<Course>("node--course", id);
+    return {
+      title: course.title,
+      description:
+        course.field_description?.summary ||
+        course.field_description?.value?.replace(/<[^>]+>/g, "").slice(0, 160) ||
+        course.title,
+    };
+  } catch {
+    return { title: "Курс не знайдено" };
+  }
+}
 
 export default async function CoursePage({
   params,
@@ -11,16 +32,16 @@ export default async function CoursePage({
 }) {
   const { id } = await params;
 
-  let course: any;
+  let course: Course;
   try {
-    course = await drupal.getResource("node--course", id, {
+    course = await drupal.getResource<Course>("node--course", id, {
       params: { include: "field_instructor,field_category,field_level" },
     });
   } catch {
     notFound();
   }
 
-  const lessons = await drupal.getResourceCollection<any[]>("node--lesson", {
+  const lessons = await drupal.getResourceCollection<Lesson[]>("node--lesson", {
     params: {
       "filter[status]": 1,
       "filter[field_course.id]": id,
@@ -42,13 +63,15 @@ export default async function CoursePage({
       <ol className="list-decimal space-y-2 pl-6">
         {lessons.map((lesson) => (
           <li key={lesson.id}>
-  <Link href={`/lessons/${lesson.id}`} className="text-blue-500">
-    {lesson.title}
-  </Link>
-</li>
+            <Link href={`/lessons/${lesson.id}`} className="text-blue-500">
+              {lesson.title}
+            </Link>
+          </li>
         ))}
       </ol>
-      {lessons.length === 0 && <p className="text-gray-500">Уроків поки немає.</p>}
+      {lessons.length === 0 && (
+        <p className="text-gray-500">Уроків поки немає.</p>
+      )}
     </main>
   );
 }
