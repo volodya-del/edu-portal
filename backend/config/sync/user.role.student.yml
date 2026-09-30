@@ -1,9 +1,14 @@
 uuid: 9cf39bb3-11f6-4e25-b498-04751cad3184
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.basic_html
+  module:
+    - filter
 id: student
 label: Student
 weight: 4
 is_admin: false
-permissions: {  }
+permissions:
+  - 'use text format basic_html'

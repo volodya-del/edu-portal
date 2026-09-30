@@ -2,10 +2,7 @@ uuid: 692471d0-1fc5-4231-a3c7-cca2c4bbeb72
 langcode: en
 status: true
 dependencies:
-  config:
-    - filter.format.restricted_html
   module:
-    - filter
     - system
 _core:
   default_config_hash: Tus1ZTNXKIOnrennR1hnTbc7wUPBXHTUm5UdCpEhJSk
@@ -15,4 +12,3 @@ weight: 0
 is_admin: false
 permissions:
   - 'access content'
-  - 'use text format restricted_html'

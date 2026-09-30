@@ -3,11 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
+    - filter.format.basic_html
     - node.type.course
     - node.type.lesson
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - filter
     - node
     - system
 id: instructor
@@ -24,5 +26,6 @@ permissions:
   - 'edit own lesson content'
   - 'use editorial transition create_new_draft'
   - 'use editorial transition send_to_review'
+  - 'use text format basic_html'
   - 'view own unpublished content'
   - 'view the administration theme'
