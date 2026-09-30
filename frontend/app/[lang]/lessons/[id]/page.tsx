@@ -1,39 +1,47 @@
-import { drupal } from "@/lib/drupal";
-import { notFound } from "next/navigation";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { drupal } from "@/lib/drupal";
+import { dictionary, isLocale } from "@/lib/i18n";
 import type { Lesson } from "@/lib/types";
 
 export const revalidate = 60;
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+type Props = { params: Promise<{ lang: string; id: string }> };
+
+export async function generateMetadata({ params }: Props) {
+  const { lang, id } = await params;
+  if (!isLocale(lang)) return {};
   try {
-    const lesson = await drupal.getResource<Lesson>("node--lesson", id);
+    const lesson = await drupal.getResource<Lesson>("node--lesson", id, {
+      locale: lang,
+      defaultLocale: "none",
+    });
     return {
       title: lesson.title,
       description:
-        lesson.body?.value?.replace(/<[^>]+>/g, "").slice(0, 160) ||
-        lesson.title,
+        lesson.body?.value?.replace(/<[^>]+>/g, "").slice(0, 160) || lesson.title,
+      alternates: {
+        languages: {
+          uk: `/uk/lessons/${id}`,
+          en: `/en/lessons/${id}`,
+        },
+      },
     };
   } catch {
-    return { title: "Урок не знайдено" };
+    return { title: "Not found" };
   }
 }
 
-export default async function LessonPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+export default async function LessonPage({ params }: Props) {
+  const { lang, id } = await params;
+  if (!isLocale(lang)) notFound();
+  const t = dictionary[lang];
 
   let lesson: Lesson;
   try {
     lesson = await drupal.getResource<Lesson>("node--lesson", id, {
+      locale: lang,
+      defaultLocale: "none",
       params: { include: "field_course" },
     });
   } catch {
@@ -44,7 +52,7 @@ export default async function LessonPage({
     <main className="mx-auto max-w-3xl p-8">
       {lesson.field_course && (
         <Link
-          href={`/courses/${lesson.field_course.id}`}
+          href={`/${lang}/courses/${lesson.field_course.id}`}
           className="text-sm text-blue-500"
         >
           ← {lesson.field_course.title}
@@ -65,7 +73,7 @@ export default async function LessonPage({
             target="_blank"
             rel="noopener noreferrer"
           >
-            Відео до уроку
+            {t.video}
           </a>
         </p>
       )}
