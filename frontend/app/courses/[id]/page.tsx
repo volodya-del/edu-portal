@@ -41,7 +41,11 @@ export default async function CoursePage({
       <h2 className="mb-3 text-xl font-semibold">Уроки</h2>
       <ol className="list-decimal space-y-2 pl-6">
         {lessons.map((lesson) => (
-          <li key={lesson.id}>{lesson.title}</li>
+          <li key={lesson.id}>
+  <Link href={`/lessons/${lesson.id}`} className="text-blue-500">
+    {lesson.title}
+  </Link>
+</li>
         ))}
       </ol>
       {lessons.length === 0 && <p className="text-gray-500">Уроків поки немає.</p>}
