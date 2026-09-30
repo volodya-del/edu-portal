@@ -4,8 +4,15 @@ status: true
 dependencies:
   config:
     - node.type.lesson
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '1'
 id: node.lesson
 target_entity_type_id: node
 target_bundle: lesson
-default_langcode: site_default
-language_alterable: false
+default_langcode: uk
+language_alterable: true
