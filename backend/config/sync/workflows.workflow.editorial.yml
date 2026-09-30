@@ -2,6 +2,9 @@ uuid: 3c636b5f-34d0-4f11-bd50-4bd645139755
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.course
+    - node.type.lesson
   module:
     - content_moderation
 _core:
@@ -21,12 +24,23 @@ type_settings:
       weight: -5
       published: false
       default_revision: false
+    in_review:
+      label: 'In review'
+      weight: 6
+      published: false
+      default_revision: false
     published:
       label: Published
       weight: 0
       published: true
       default_revision: true
   transitions:
+    approve_and_publish:
+      label: 'Approve and publish'
+      from:
+        - in_review
+      to: published
+      weight: 7
     archive:
       label: Archive
       from:
@@ -45,6 +59,12 @@ type_settings:
         - archived
       to: published
       weight: 4
+    back_to_draft:
+      label: 'Back to draft'
+      from:
+        - in_review
+      to: draft
+      weight: 6
     create_new_draft:
       label: 'Create New Draft'
       from:
@@ -59,5 +79,14 @@ type_settings:
         - published
       to: published
       weight: 1
-  entity_types: {  }
+    send_to_review:
+      label: 'Send to review'
+      from:
+        - draft
+      to: in_review
+      weight: 5
+  entity_types:
+    node:
+      - course
+      - lesson
   default_moderation_state: draft

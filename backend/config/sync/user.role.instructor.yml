@@ -1,0 +1,28 @@
+uuid: 58fa3e04-9df1-4ec1-84dc-308c891cafe6
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.course
+    - node.type.lesson
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - node
+    - system
+id: instructor
+label: Instructor
+weight: 5
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'create course content'
+  - 'create lesson content'
+  - 'delete own course content'
+  - 'delete own lesson content'
+  - 'edit own course content'
+  - 'edit own lesson content'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition send_to_review'
+  - 'view own unpublished content'
+  - 'view the administration theme'

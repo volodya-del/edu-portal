@@ -1,0 +1,14 @@
+uuid: cd9f9c42-1a44-4c10-9794-1def8219cba3
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.instructor
+  module:
+    - user
+id: user_add_role_action.instructor
+label: 'Add the Instructor role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: instructor
