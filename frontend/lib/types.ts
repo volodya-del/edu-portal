@@ -7,6 +7,7 @@ export interface Course extends DrupalNode {
   field_category?: DrupalTaxonomyTerm;
   field_level?: DrupalTaxonomyTerm;
   field_instructor?: DrupalNode;
+  field_cover_image?: { uri?: { url: string } };
 }
 
 export interface Lesson extends DrupalNode {

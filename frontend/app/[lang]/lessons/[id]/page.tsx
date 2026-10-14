@@ -48,35 +48,30 @@ export default async function LessonPage({ params }: Props) {
     notFound();
   }
 
-  return (
-    <main className="mx-auto max-w-3xl p-8">
-      {lesson.field_course && (
-        <Link
-          href={`/${lang}/courses/${lesson.field_course.id}`}
-          className="text-sm text-blue-500"
-        >
-          ← {lesson.field_course.title}
-        </Link>
-      )}
-      <h1 className="mb-6 mt-4 text-3xl font-bold">{lesson.title}</h1>
-      {lesson.body?.processed && (
-        <div
-          className="space-y-3"
-          dangerouslySetInnerHTML={{ __html: lesson.body.processed }}
-        />
-      )}
-      {lesson.field_video_url?.uri && (
-        <p className="mt-6">
-          <a
-            href={lesson.field_video_url.uri}
-            className="text-blue-500"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t.video}
-          </a>
-        </p>
-      )}
-    </main>
-  );
+  <main className="mx-auto max-w-3xl px-6 py-10">
+  {lesson.field_course && (
+    <Link href={`/${lang}/courses/${lesson.field_course.id}`} className="text-sm text-accent">
+      ← {lesson.field_course.title}
+    </Link>
+  )}
+  <article className="mt-4 rounded-2xl border border-line bg-white p-8 shadow-sm">
+    <h1 className="mb-6 text-3xl font-bold tracking-tight">{lesson.title}</h1>
+    {lesson.body?.processed && (
+      <div
+        className="lesson-body text-slate-700"
+        dangerouslySetInnerHTML={{ __html: lesson.body.processed }}
+      />
+    )}
+    {lesson.field_video_url?.uri && (
+      <a
+        href={lesson.field_video_url.uri}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-8 inline-flex items-center rounded-full bg-accent px-5 py-2.5 font-medium text-white hover:bg-indigo-700"
+      >
+        ▶ {t.video}
+      </a>
+    )}
+  </article>
+</main>
 }
