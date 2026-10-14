@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props) {
     return {
       title: lesson.title,
       description:
-        lesson.body?.value?.replace(/<[^>]+>/g, "").slice(0, 160) || lesson.title,
+        lesson.field_body?.value?.replace(/<[^>]+>/g, "").slice(0, 160) || lesson.title,
       alternates: { languages: { uk: `/uk/lessons/${id}`, en: `/en/lessons/${id}` } },
     };
   } catch {
@@ -63,10 +63,10 @@ export default async function LessonPage({ params }: Props) {
           </div>
         )}
 
-        {lesson.body?.processed && (
+        {lesson.field_body?.processed && (
           <div
             className="lesson-body text-slate-700"
-            dangerouslySetInnerHTML={{ __html: lesson.body.processed }}
+            dangerouslySetInnerHTML={{ __html: lesson.field_body.processed }}
           />
         )}
       </article>

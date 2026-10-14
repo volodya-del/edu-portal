@@ -11,7 +11,7 @@ export interface Course extends DrupalNode {
 }
 
 export interface Lesson extends DrupalNode {
-  body?: { value?: string; processed?: string };
+  field_body?: { value?: string; processed?: string };
   field_video_url?: { uri: string; title?: string };
   field_order?: number;
   field_course?: Course;
